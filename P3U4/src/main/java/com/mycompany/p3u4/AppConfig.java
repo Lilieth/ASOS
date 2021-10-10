@@ -28,9 +28,9 @@ public class AppConfig {
         return dp;
     }
     
-    //ries
-    @Bean(name = "processor")
-    public DataProcessor mpFactory() {
-        return new DataProcessor(msFactory());
-    }
+//    //riesenie od Majt, robi to to iste, ako 24-29.
+//    @Bean(name = "processor")
+//    public DataProcessor mpFactory() {
+//        return new DataProcessor(msFactory());
+//    }
 }
