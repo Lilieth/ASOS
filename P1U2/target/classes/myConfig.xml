@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+    <bean id="mysource" class="com.mycompany.p1u2.DataSourceMock"/> 
+    <!-- ak chcem pouzit druhy subor -->
+    <bean id="myprocessor" class="com.mycompany.p1u2.DataProcessor"/>
+        <property name="source" ref="mysource"/>
+    <!-- bacha na to ze subory musia mat implements interface -->
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+">
+    <bean id="mysource" class="com.mycompany.p3u1.DataSource">
+        <property name="count" value="2"/>
+    </bean>
+    <bean id="mymock" class="com.mycompany.p3u1.DataSourceMock"/>
+    <bean id="myprocessor" class="com.mycompany.p3u1.DataProcessor">
+        <property name="source" ref="mysource"/>
+        <!-- Cez konstruktor to mam robit iba ak je ta referencia povinna,
+        teda musi to mat nastavene na source
+        teda potrebujeme mat konstruktor odkomentovany v subore DataProcessor.java
+//      public DataProcessor(DataSourceIfc source) {
+//          this.source = source;
+//      }
+        
+        teda uz v konsrtuktore dostane ten source, nepotrebujeme to menit
+        <constructor-arg ref="mysource"/>-->
+    </bean>
+    
+    <!-- Dalsi sposob ako to spravit je pomocou autowire, kde nepotrebujeme 
+    nafix dat nazov, ale nam to bude hladat bean podla .this nazvu (source), 
+    teda v nasom pripade nenajde nic
+    
+    ......................................
+    Toto je z Dataprocessor.java:
+    private DataSourceIfc source;
+    .
+    .
+    .
+    public void setSource(DataSourceIfc source) {
+        this.source = source;
+    }
+    ......................................
+    Toto je to riesenie s autowire, ktore pisem do .xml
+    <bean id="myprocessor" class="com.mycompany.p3u1.DataProcessor" autowire="byName">  
+    </bean>
+    -->
+</beans>

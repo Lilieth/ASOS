@@ -1,0 +1,6 @@
+com/mycompany/p3u4/AppConfig.class
+com/mycompany/p3u4/AppMain.class
+com/mycompany/p3u4/DataSource.class
+com/mycompany/p3u4/DataSourceMock.class
+com/mycompany/p3u4/DataProcessor.class
+com/mycompany/p3u4/DataSourceIfc.class

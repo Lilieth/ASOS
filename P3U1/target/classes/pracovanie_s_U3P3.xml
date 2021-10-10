@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+">
+    <bean id="source" class="com.mycompany.p3u1.DataSource">
+        <!--moze to tu byt, nemusi
+        <property name="count" value="2"/>-->
+    </bean>
+    <bean id="myprocessor" class="com.mycompany.p3u1.DataProcessor" autowire="byType"> 
+    </bean>
+</beans>

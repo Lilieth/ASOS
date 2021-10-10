@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+">
+    <!-- V tomto formate (ak mam dve constructor based injectiony, teda v
+    obidvoch pripadoch pouzivam <constructor-arg ref=""/>) 
+    to skape, lebo aby som ja mohla vytvorit bean mySubject potrebujem uz do 
+    jeho konstruktora dat myObserver, teda ten musi byt vytvoreny skor. Tak isto, 
+    ked chcem vytvorit myObserver, tak konstruktor chce mySubject.
+    Hoci mame pripravene aj konstruktor bez parametrov, on chce vytvorit s tym.
+    POINTA JE, ze nemozem mat obidve vytvorene cez constructor based dependency
+    injection (teda cez: constructor-arg)
+    -->
+    <bean id="mySubject" class="com.mycompany.p3u2.Subject">
+        <!-- teda tuto cast zakomentujem a pridam setter based
+        <constructor-arg ref="myObserver"/>-->
+        <property name="observer" ref="myObserver"/>
+    </bean>
+    <bean id="myObserver" class="com.mycompany.p3u2.Observer">
+        <constructor-arg ref="mySubject"/>
+    </bean>
+    
+    <!--Ak mame taketo riesenie tak najprv vytvaram mySubject pomocou setter based
+    injection sa zavola constructor bez parametrov, az nasledne constructor myObserver
+    s parametrom mySubject a az na konci setne mySubject parametre na myObserver.
+    
+    Pokial su kruhove referencie, ako v nasom pripade, tak sa neda pouzivat cisto
+    constructor based injection.
+    
+    Kruhovere referencie su v tomto pripade 
+    v Observer.java:
+        private Subject subject;
+    v Subject.java:
+    private Subject subject; 
+    
+    Ak by som pri kruhovych referencii pouzivala autowire, to by tiez mohlo 
+    skomplikovat situaciu, kedze nevedeli by sme zistit, kde je aktualne problem
+    -->
+</beans>
